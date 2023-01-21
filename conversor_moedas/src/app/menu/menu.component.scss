@@ -1,0 +1,55 @@
+@import "../variables";
+
+nav{
+    padding: 0px;
+    margin: 0px;
+    background: $primary_color;
+    background: linear-gradient(to top, hsl(353, 100%, 86%), #ee9ca7); 
+    
+    .navbar-brand{
+        font-family: 'Style Script', cursive;
+        font-size: 2rem;
+        color: white;
+    }
+    
+    .navbar-nav a{
+        padding: 1.1rem;
+        height: auto !important;
+        color: white;
+        transition-duration: 0.2s;
+        // border-radius: 3px;
+        
+        &:hover{
+            color:#FFAFBD;
+            background-color: white;
+        }
+    }
+}
+// mat-toolbar{
+//     // padding: 0px;
+//     padding: 0 7rem ;
+//     background: #ee9ca7;  /* fallback for old browsers */
+//     background: linear-gradient(to left, hsl(353, 100%, 88%), #ee9ca7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+//     .example-spacer {
+//         flex: 1 1 auto;
+//     }
+
+//     .brand{
+//         font-family: 'Style Script', cursive;
+//         font-size: 2rem;
+//         color: white;
+//     }
+    
+//     a{
+//         padding: 1rem;
+//         color: white;
+//         transition-duration: 0.2s;
+//         height: 100%;
+//         // border-radius: 3px;
+//     }
+//     a:hover{
+//         color:#FFAFBD;
+//         background-color: white;
+//     }
+// }

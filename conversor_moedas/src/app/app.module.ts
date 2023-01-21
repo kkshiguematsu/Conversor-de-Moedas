@@ -5,16 +5,25 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
+import { MenuModule } from './menu/menu.module';
+import { FooterModule } from './footer/footer.module';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NgbModule
+    NgbModule,
+    MatSlideToggleModule,
+    MenuModule,
+    FooterModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

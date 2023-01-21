@@ -1,0 +1,17 @@
+@import "../variables";
+
+.div_footer{
+    width: auto;
+    color: white;
+    background: $dark_background;
+    padding: 2rem;
+    
+    button{
+        background-color: $primary_color;
+    }
+
+    mat-divider{
+        margin: 2rem 0;
+        background-color: white;
+    }
+}
