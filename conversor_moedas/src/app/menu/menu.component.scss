@@ -7,15 +7,16 @@ nav{
     background: linear-gradient(to top, hsl(353, 100%, 86%), #ee9ca7); 
     
     .navbar-brand{
-        font-family: 'Style Script', cursive;
+        font-family: $font_title;
         font-size: 2rem;
         color: white;
     }
     
     .navbar-nav a{
         padding: 1.1rem;
-        height: auto !important;
         color: white;
+        font-family: $font_text;
+        height: auto !important;
         transition-duration: 0.2s;
         // border-radius: 3px;
         

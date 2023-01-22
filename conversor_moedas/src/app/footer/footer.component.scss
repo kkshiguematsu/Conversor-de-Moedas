@@ -1,17 +1,107 @@
 @import "../variables";
 
-.div_footer{
+.div_footer {
     width: auto;
     color: white;
     background: $dark_background;
+    // background-image: url(../../assets/wallpaper_firewatch_purple.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    // transform: matrix3d(0,0,-1px) scale(2);
     padding: 2rem;
+
     
-    button{
-        background-color: $primary_color;
+
+
+    .footer_brand {
+        font-family: $font_title;
+        font-size: 2rem;
     }
 
-    mat-divider{
-        margin: 2rem 0;
+    .list_menu {
+        p {
+            color: grey;
+
+        }
+    }
+
+    .list_pages {
+        margin: auto;
+        transition-duration: 0.2s;
+
+        a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem
+        }
+
+        &:hover {
+            color: white;
+            background-color: $primary_color;
+        }
+
+    }
+
+    mat-divider.footer {
+        margin: 1rem 0;
         background-color: white;
     }
+
+    mat-divider.list {
+        margin: 0;
+        // padding: ;
+        background-color: grey;
+    }
+
+    form{
+        height: 100%;
+
+        button {
+            background-color: $primary_color;
+        }
+
+        .input_footer,button{
+            width: 75%;
+
+        }
+        .input_footer {
+            // background-color: white;
+    
+            mat-label,input,button{
+                color: white;
+            }
+            input{
+                &::placeholder{
+                    color: grey;
+                }
+            }
+            &:focus{
+                border-color: $primary_color;
+            }
+            input:hover{
+                border-color: $primary_color;
+            }
+    
+        }
+    }
+
+    .col-md-1 div {
+        button{
+            transition-duration: 0.2s;
+            border: 1px solid grey;
+            background-color:rgba(0, 0, 0, 0);
+            &:hover{
+                border-color: $primary_color;
+                background-color: $primary_color;
+            }
+        }
+    }
+
+    
+    .created{
+        font-size: 10px;
+        color: grey;
+    }
+    
 }
