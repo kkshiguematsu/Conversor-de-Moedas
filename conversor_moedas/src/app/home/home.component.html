@@ -1,5 +1,46 @@
-<div class="home_div d-flex justify-content-center align-items-center">
-    <div class="conversor">
-        <h1>teste</h1>
+<main class="home_div d-flex justify-content-center align-items-center">
+    <div class="conversor d-flex flex-column align-items-center">
+        <h2 class="title">Conversor</h2>
+        <h6 class="title">de</h6>
+        <h2 class="title">Moedas</h2>
+        <form class="d-flex flex-column" action="">
+            <div class="page_input">
+                <div class="select_input_absolute">
+
+                </div>
+                <mat-form-field appearance="fill" floatLabel="always">
+                    <input matInput type="number" class="example-right-align" placeholder="0">
+                    <span matTextPrefix>$&nbsp;</span>
+                    <span matTextSuffix>.00</span>
+                </mat-form-field>
+            </div>
+            <div class="page_input d-flex justify-content-center align-items-center">
+                <mat-icon class=""> arrow_downward </mat-icon>
+            </div>
+            <div class="page_input pt-4">
+                <div class="select_input_absolute">
+
+                </div>
+                <mat-form-field appearance="fill" floatLabel="always">
+                    <input matInput type="number" class="example-right-align" placeholder="0">
+                    <span matTextPrefix>$&nbsp;</span>
+                    <span matTextSuffix>.00</span>
+                </mat-form-field>
+            </div>
+            <div class="page_input">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <button mat-stroked-button>Limpar</button>
+                        </div>
+                        <div class="col-md-8">
+                            <button mat-stroked-button>Converter</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+        </form>
     </div>
-</div>
+</main>
