@@ -31,15 +31,17 @@
         transition-duration: 0.2s;
 
         a {
+            font-size: 10px;
             color: white;
+            border-bottom: 1px solid $dark_background;
             text-decoration: none;
-            padding: 0.5rem
+            padding: 0.5rem;
+            &:hover {
+                color: white;
+                border-bottom: 1px solid $primary_color;
+            }
         }
 
-        &:hover {
-            color: white;
-            background-color: $primary_color;
-        }
 
     }
 

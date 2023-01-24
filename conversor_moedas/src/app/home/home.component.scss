@@ -16,17 +16,6 @@
         border-radius: 10px;
         box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.75);
 
-        .mat-form-field-appearance-outline .mat-form-field-outline-start {
-            background-color: grey !important;
-        }
-
-        .mat-form-field-appearance-outline .mat-form-field-outline-gap {
-            background-color: grey !important;
-        }
-
-        .mat-form-field-appearance-outline .mat-form-field-outline-end {
-            background-color: grey !important;
-        }
         .page_input {
             // padding-top: 0.5rem;
 
@@ -35,27 +24,21 @@
                 color: white;
                 background-color: $second_dark_background;
                 border: 1px solid $primary_color;
-                border-radius: 30px;
+                border-radius: 20px;
                 transition-duration: 0.2s;
 
                 &:hover {
                     background-color: $primary_color;
                 }
             }
-
             input {
-
-                // background-color: red;
                 .mat-input-wrapper {
                     background-color: #FF0000;
                 }
             }
-
-            
         }
 
-        h2,
-        h6 {
+        h2,h6 {
             padding: 0;
             margin: 0;
             height: auto;
