@@ -10,12 +10,18 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
 import { FooterComponent } from './footer/footer.component';
+import { ListagemComponent } from './listagem/listagem.component';
+import { HistoricoComponent } from './historico/historico.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+
+
 
 @NgModule({
   declarations: [
@@ -23,6 +29,8 @@ import { MatDividerModule } from '@angular/material/divider';
     HomeComponent,
     MenuComponent,
     FooterComponent,
+    ListagemComponent,
+    HistoricoComponent,
 
   ],
   imports: [
@@ -36,7 +44,10 @@ import { MatDividerModule } from '@angular/material/divider';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDividerModule
+    MatDividerModule,
+    MatPaginatorModule,
+    MatTableModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

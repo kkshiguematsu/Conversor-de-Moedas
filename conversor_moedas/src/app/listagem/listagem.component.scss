@@ -1,0 +1,26 @@
+@import "../variables";
+
+.listagem_page{
+    width: auto;
+    min-height: 100vh;
+    background-color: $light_background;
+
+    .listagem{
+        width: 75%;
+        height: auto;
+        background-color: $second_dark_background;
+        border: 1px solid white;
+        border-radius: 10px;
+        box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.75);
+
+        div {
+            .mat-column-id, .mat-column-simbolo, .mat-column-descricao{
+                text-align: center;
+            }
+            
+            .mat-mdc-row:hover .mat-mdc-cell {
+                border-color: $primary_color;
+            }
+        }
+    }
+}   
