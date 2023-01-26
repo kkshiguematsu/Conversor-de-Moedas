@@ -20,8 +20,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-
-
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -31,7 +30,6 @@ import { MatTableModule } from '@angular/material/table';
     FooterComponent,
     ListagemComponent,
     HistoricoComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -47,7 +45,8 @@ import { MatTableModule } from '@angular/material/table';
     MatDividerModule,
     MatPaginatorModule,
     MatTableModule,
-    
+    MatSortModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

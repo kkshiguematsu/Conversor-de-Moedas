@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { OnInit  } from '@angular/core';
 import { ViewChild  } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+
 
 export interface Token {
   id: number;
@@ -29,7 +31,7 @@ request.onload = function () {
   json = JSON.parse(json_string);
 
   for (let i = 0; i < json.length; i++) {
-    var solo_token: Token = { id: i, simbolo: json[i].code, descricao: json[i].description };
+    var solo_token: Token = { id: i+1, simbolo: json[i].code, descricao: json[i].description };
     console.log(typeof tokenData)
     tokenData.push(solo_token);
   }
@@ -46,12 +48,14 @@ export class ListagemComponent implements OnInit{
   displayedColunas = ["id", "simbolo", "descricao"];
   
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   
   ngOnInit(){
     this.tableData = new MatTableDataSource(tokenData);
   }
   ngAfterViewInit() {
     this.tableData.paginator = this.paginator;
+    this.tableData.sort = this.sort;
   }
   buscaToken(event:Event){
     var value = (event.target as HTMLInputElement).value;
