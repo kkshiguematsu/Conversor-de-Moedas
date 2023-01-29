@@ -1,21 +1,8 @@
 import { Component } from '@angular/core';
-import { FormGroup ,FormBuilder } from '@angular/forms';
-import { OnInit  } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { OnInit } from '@angular/core';
+import { Conversao, Token } from './home';
 import { HomeService } from './home.service';
-
-export interface Json{
-  data: string,
-  taxa: number,
-  resultado: number,
-  origem: string,
-  destino: string,
-  quantidade: number,
-}
-
-export interface Token {
-  simbolo: string;
-}
 
 var requestURL = 'https://api.exchangerate.host/symbols';
 var request = new XMLHttpRequest();
@@ -47,45 +34,43 @@ request.onload = function () {
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  
   convesorForm: FormGroup;
   tokens: Token[] = tokenData;
-  json: Json;
+  conversao: Conversao[] = [];
+  taxa:number;
+  valor:number;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private service: HomeService
-  ){}
-  
-  ngOnInit(){
-    this.convesorForm = this.formBuilder.group({
+    private fb: FormBuilder,
+    private service: HomeService,
+  ) { }
+
+  ngOnInit() {
+    this.convesorForm = this.fb.group({
       valor: [''],
       tokenOrigem: [''],
       tokenDestino: [''],
     });
+    sessionStorage.clear();
+    
+    // this.service.getTokens().subscribe(dados => {
+    //   console.log(dados)
+    // })
   }
 
-  converterValor(){
-    if(this.convesorForm.value.valor > 0){
-      // let requestURL:string = "https://api.exchangerate.host/convert?from="+ this.convesorForm.value.tokenOrigem +"&to="+ this.convesorForm.value.tokenDestino +"&amount="+ this.convesorForm.value.valor;
-      // let request = new XMLHttpRequest();
-      // request.open('GET', requestURL);
-      // request.responseType = 'json';
-      // request.send();
-  
-      request.onload = function() {
-        let response = request.response;
-        let json_string: string = JSON.stringify(response);
-        let json = JSON.parse(json_string);
+  converterValor() {
+    if (this.convesorForm.value.valor > 0) {
+      this.service.getConvesao(
+        this.convesorForm.value.tokenOrigem,
+        this.convesorForm.value.tokenDestino,
+        this.convesorForm.value.valor).subscribe(dado => {
+          this.conversao.push(dado)
+          this.valor = dado.result
+          this.taxa = dado.info.rate
+        })
         
-        // this.json: Json = {
-
-        // } 
-
-        // this.json = json; 
-        console.log(json);
-      }
-    }else{
+        sessionStorage.setItem("conversao",JSON.stringify(this.conversao));
+    } else {
       // PRINT ERRO
     }
   }

@@ -35,11 +35,12 @@
             <div class="page_input d-flex justify-content-center align-items-center">
                 <mat-icon class=""> arrow_downward </mat-icon>
             </div>
-            <div class="page_input">
+            <div class="page_input mt-3 mb-3">
                 <button (click)="converterValor()" mat-stroked-button>Converter</button>
             </div>
-            <div class="visualicao d-flex justify-content-center align-items-center">
-                
+            <div class="visualicao d-flex flex-column justify-content-center align-items-center border">
+                <span>Valor convertido: {{ valor }}</span>
+                <span>Taxa utilizada: {{ taxa }} </span>
             </div>
         </form>
     </div>

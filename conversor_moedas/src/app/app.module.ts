@@ -34,6 +34,7 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent,
     ListagemComponent,
     HistoricoComponent,
+    
   ],
   imports: [
     BrowserModule,
