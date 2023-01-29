@@ -32,7 +32,6 @@ request.onload = function () {
 
   for (let i = 0; i < json.length; i++) {
     var solo_token: Token = { id: i+1, simbolo: json[i].code, descricao: json[i].description };
-    console.log(typeof tokenData)
     tokenData.push(solo_token);
   }
 }

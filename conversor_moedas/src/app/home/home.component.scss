@@ -5,7 +5,7 @@
     height: 100vh;
     background-color: $light_background;
 
-    .row div{
+    .row div {
         padding: 0;
     }
 
@@ -31,14 +31,29 @@
                     background-color: $primary_color;
                 }
             }
-            input {
-                .mat-input-wrapper {
-                    background-color: #FF0000;
-                }
+
+            .input-right-align {
+                text-align: right;
+            }
+
+            input.input-right-align::-webkit-outer-spin-button,
+            input.input-right-align::-webkit-inner-spin-button {
+                display: none;
+            }
+
+            input.input-right-align {
+                -moz-appearance: textfield;
+            }
+
+            .input-right-align {}
+
+            mat-form-field {
+                width: 100%;
             }
         }
 
-        h2,h6 {
+        h2,
+        h6 {
             padding: 0;
             margin: 0;
             height: auto;

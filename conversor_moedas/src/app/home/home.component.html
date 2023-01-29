@@ -1,44 +1,45 @@
 <main class="home_page d-flex justify-content-center align-items-center">
     <div class="conversor d-flex flex-column align-items-center">
-        <h2 class="title">Conversor</h2>
-        <h6 class="title">de</h6>
-        <h2 class="title">Moedas</h2>
-        <form class="d-flex flex-column" action="">
+        <div class="pb-3">
+            <h2 class="title">Conversor de Moedas</h2>
+        </div>
+        <form class="d-flex flex-column" [formGroup]="convesorForm">
             <div class="page_input">
-                <div class="select_input_absolute">
-
-                </div>
-                <mat-form-field>
-                    <input matInput type="number" class="example-right-align" placeholder="0">
+                <mat-form-field appearance="fill" floatLabel="always">
+                    <mat-label>Valor</mat-label>
+                    <input matInput type="number" class="input-right-align" placeholder="0" formControlName="valor">
                     <span matTextPrefix>$&nbsp;</span>
                     <span matTextSuffix>.00</span>
+                </mat-form-field>
+            </div>
+            <div class="page_input">
+                <mat-form-field appearance="fill">
+                    <mat-label>Token Atual</mat-label>
+                    <mat-select formControlName="tokenOrigem">
+                        <mat-option *ngFor="let token of tokens" [value]="token.simbolo">
+                            {{ token.simbolo }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="page_input">
+                <mat-form-field appearance="fill">
+                    <mat-label>Token Destino</mat-label>
+                    <mat-select formControlName="tokenDestino">
+                        <mat-option *ngFor="let token of tokens" [value]="token.simbolo">
+                            {{ token.simbolo }}
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
             </div>
             <div class="page_input d-flex justify-content-center align-items-center">
                 <mat-icon class=""> arrow_downward </mat-icon>
             </div>
-            <div class="page_input pt-4">
-                <div class="select_input_absolute">
-
-                </div>
-                <mat-form-field>
-                    <input matInput type="number" class="example-right-align" placeholder="0">
-                    <span matTextPrefix>$&nbsp;</span>
-                    <span matTextSuffix>.00</span>
-                </mat-form-field>
-            </div>
             <div class="page_input">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <button mat-stroked-button>Limpar</button>
-                        </div>
-                        <div class="col-md-8">
-                            <button mat-stroked-button>Converter</button>
-                        </div>
-                    </div>
-
-                </div>
+                <button (click)="converterValor()" mat-stroked-button>Converter</button>
+            </div>
+            <div class="visualicao d-flex justify-content-center align-items-center">
+                
             </div>
         </form>
     </div>
