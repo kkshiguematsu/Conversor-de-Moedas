@@ -17,6 +17,6 @@ export class HomeService {
 
   getTokens(){
     let url = 'https://api.exchangerate.host/symbols';
-    return this.http.get(url);
+    return this.http.get<Token>(url);
   }
 }

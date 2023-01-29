@@ -52,9 +52,10 @@ export class HomeComponent implements OnInit {
       tokenDestino: [''],
     });
     sessionStorage.clear();
-    
+
     // this.service.getTokens().subscribe(dados => {
-    //   console.log(dados)
+    //   this.tokens = { simbolo: dados. };
+    //   console.log(dados.simbolo)
     // })
   }
 

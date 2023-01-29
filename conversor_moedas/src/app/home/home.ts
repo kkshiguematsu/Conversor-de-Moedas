@@ -18,5 +18,5 @@ export interface Conversao {
 }
 
 export interface Token {
-simbolo: string;
+    simbolo: string;
 }

@@ -12,9 +12,19 @@
     .conversor {
         padding: 2rem 6rem;
         background-color: $second_dark_background;
-        border: 1px solid white;
+        // border: 1px solid white;
         border-radius: 10px;
         box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.75);
+
+        .title {
+            top: 20px;
+            left: -40px;
+            color: white;
+            padding: 5px 20px 5px 70px;
+            font-family: $font_title;
+            background-color: $primary_color;
+            // border-radius: 0 10px 10px 0;
+        }
 
         .page_input {
             // padding-top: 0.5rem;
@@ -52,21 +62,7 @@
             }
         }
 
-        h2,
-        h6 {
-            padding: 0;
-            margin: 0;
-            height: auto;
-        }
-
-        .title {
-            color: white;
-            font-family: $font_title;
-            // font-size: 40px;
-            // background-color: $primary_color;
-            border-radius: 3px;
-            padding: rem;
-        }
+        
 
         mat-icon {
             color: white;
@@ -74,5 +70,8 @@
     }
     .visualicao{
         color: white;
+        padding: 0.5rem;
+        border: 1px solid $primary_color;
+        border-radius: 5px;
     }
 }
