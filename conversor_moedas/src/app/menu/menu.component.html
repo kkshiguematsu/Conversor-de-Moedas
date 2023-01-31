@@ -6,7 +6,8 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbar_collapse">
             <div class="navbar-nav">
-                <a class="nav-link" routerLinkActive="active" routerLink="">Home</a>
+                <a class="nav-link" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" routerLink="">Home</a>
+                <a class="nav-link" routerLinkActive="active" routerLink="/conversao">Conversao</a>
                 <a class="nav-link" routerLinkActive="active" routerLink="/listagem">Listagem</a>
                 <a class="nav-link" routerLinkActive="active" routerLink="/historico">Histórico</a>
             </div>

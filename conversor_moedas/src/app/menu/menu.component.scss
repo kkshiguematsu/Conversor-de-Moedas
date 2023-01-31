@@ -20,9 +20,9 @@ nav{
         transition-duration: 0.2s;
         // border-radius: 3px;
         
-        &:hover{
-            color:#FFAFBD;
-            background-color: white;
-        }
+    }
+    .active{
+        color:#FFAFBD !important;
+        background-color: white !important;
     }
 }

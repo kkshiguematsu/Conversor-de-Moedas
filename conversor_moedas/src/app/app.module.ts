@@ -24,6 +24,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ConversaoComponent } from './conversao/conversao.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent,
     ListagemComponent,
     HistoricoComponent,
+    ConversaoComponent,
     
   ],
   imports: [

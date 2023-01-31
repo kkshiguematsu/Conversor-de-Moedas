@@ -1,77 +1,44 @@
 @import "../variables.scss";
 
-.home_page {
+.home_page{
     width: auto;
     height: 100vh;
-    background-color: $light_background;
+    background-image: url("../../assets/background_home.jpg");
+    background-repeat: no-repeat;
+    background-position: right center ;
+    background-size: 50rem;
+    // background-color: $light_background;
 
-    .row div {
-        padding: 0;
-    }
-
-    .conversor {
-        padding: 2rem 6rem;
-        background-color: $second_dark_background;
-        // border: 1px solid white;
-        border-radius: 10px;
-        box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.75);
-
-        .title {
-            top: 20px;
-            left: -40px;
-            color: white;
-            padding: 5px 20px 5px 70px;
-            font-family: $font_title;
-            background-color: $primary_color;
-            // border-radius: 0 10px 10px 0;
-        }
-
-        .page_input {
-            // padding-top: 0.5rem;
-
-            button {
-                width: 100%;
+    .home{
+        width: 85%;
+        height: 70%;
+        padding: 3rem;
+        .home_left{
+            width: auto;
+            backdrop-filter: blur(5px);
+            h1{
+                color: $primary_color;
+                font-family: $font_text; 
+                font-size: 3rem;
+            }
+            span{
+                font-size: 1rem;
+            }
+            a{
+                color: $primary_color;
+            }
+            button{
                 color: white;
-                background-color: $second_dark_background;
-                border: 1px solid $primary_color;
+                padding: 0 2rem;
+                background-color: $primary_color;
+                border-color: $primary_color;
                 border-radius: 20px;
-                transition-duration: 0.2s;
-
-                &:hover {
-                    background-color: $primary_color;
+                &:hover{
+                    color: $primary_color;
+                    background-color: white;
+                    border-color: $primary_color;
                 }
             }
-
-            .input-right-align {
-                text-align: right;
-            }
-
-            input.input-right-align::-webkit-outer-spin-button,
-            input.input-right-align::-webkit-inner-spin-button {
-                display: none;
-            }
-
-            input.input-right-align {
-                -moz-appearance: textfield;
-            }
-
-            .input-right-align {}
-
-            mat-form-field {
-                width: 100%;
-            }
         }
-
-        
-
-        mat-icon {
-            color: white;
-        }
-    }
-    .visualicao{
-        color: white;
-        padding: 0.5rem;
-        border: 1px solid $primary_color;
-        border-radius: 5px;
     }
 }

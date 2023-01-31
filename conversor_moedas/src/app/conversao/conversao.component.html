@@ -1,0 +1,46 @@
+<main class="home_page d-flex justify-content-center align-items-center">
+    <div class="conversor position-relative d-flex flex-column align-items-center">
+        <h2 class="title position-absolute">Conversor de Moedas</h2>
+        <form class="d-flex flex-column mt-5" [formGroup]="convesorForm">
+            <div class="page_input mt-">
+                <mat-form-field appearance="fill" floatLabel="always">
+                    <mat-label>Valor</mat-label>
+                    <input matInput type="number" class="input-right-align" placeholder="0" formControlName="valor">
+                    <span matTextPrefix>$&nbsp;</span>
+                    <span matTextSuffix>.00</span>
+                </mat-form-field>
+            </div>
+            <div class="page_input">
+                <mat-form-field appearance="fill">
+                    <mat-label>Token Atual</mat-label>
+                    <mat-select formControlName="tokenOrigem">
+                        <mat-option *ngFor="let token of tokens" [value]="token.simbolo">
+                            {{ token.simbolo }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="page_input">
+                <mat-form-field appearance="fill">
+                    <mat-label>Token Destino</mat-label>
+                    <mat-select formControlName="tokenDestino">
+                        <mat-option *ngFor="let token of tokens" [value]="token.simbolo">
+                            {{ token.simbolo }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="page_input">
+                <button (click)="converterValor()" mat-stroked-button>Converter</button>
+            </div>
+            <div class="page_input d-flex justify-content-center align-items-center  mt-3 mb-3">
+                <mat-icon class=""> arrow_downward </mat-icon>
+            </div>
+            <div class="visualicao d-flex flex-column justify-content-center align-items-center">
+                <span>Valor convertido: {{ valor }}</span>
+                <span>Taxa utilizada: {{ taxa }} </span>
+            </div>
+        </form>
+    </div>
+</main>
