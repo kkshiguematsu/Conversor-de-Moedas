@@ -2,39 +2,12 @@ import { Component } from '@angular/core';
 import { OnInit  } from '@angular/core';
 import { ViewChild  } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-
-
-export interface Token {
-  id: number;
-  simbolo: string;
-  descricao: string;
-}
-
-var requestURL = 'https://api.exchangerate.host/symbols';
-var request = new XMLHttpRequest();
-request.open('GET', requestURL);
-request.responseType = 'json';
-request.send();
-
-var tokenData: Token[] = [];
-request.onload = function () {
-  var response = request.response;
-
-  var values = Object.values(response);
-  var json_string: string = JSON.stringify(values[2]);
-  var json = JSON.parse(json_string);
-
-  var tokens = Object.values(json);
-  json_string = JSON.stringify(tokens);
-  json = JSON.parse(json_string);
-
-  for (let i = 0; i < json.length; i++) {
-    var solo_token: Token = { id: i+1, simbolo: json[i].code, descricao: json[i].description };
-    tokenData.push(solo_token);
-  }
-}
+import { ListagemService } from './listagem.service';
+import { Ijson, token, token_data } from './moeda';
+import { delay, map } from 'rxjs/operators'
+import { Token } from '@angular/compiler';
 
 @Component({
   selector: 'app-listagem',
@@ -43,21 +16,69 @@ request.onload = function () {
 })
 
 export class ListagemComponent implements OnInit{
-  tableData: MatTableDataSource<Token>;
-  displayedColunas = ["id", "simbolo", "descricao"];
+  tableSource: MatTableDataSource<token_data>;
+  token: token;
+  LTS_token: token_data[];
+
+
+  displayedColunas = ["simbolo", "descricao"]
   
+  constructor(private service: ListagemService){
+    // this.testeSource = {} as Ijson;
+    
+  }
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   
+  
   ngOnInit(){
-    this.tableData = new MatTableDataSource(tokenData);
+    // this.LTS_setTable();
+    this.setTable();
+
   }
+
   ngAfterViewInit() {
-    this.tableData.paginator = this.paginator;
-    this.tableData.sort = this.sort;
+    
+    this.tableSource.sort = this.sort;
   }
+
+  setTable(){
+    this.service.getTokens().pipe(
+      map((res:Ijson) => Object.values(res.symbols)),
+    ).subscribe(
+      (data:any) => {
+        console.log(data);
+        this.LTS_token = data;
+        this.tableSource = new MatTableDataSource(this.LTS_token)
+
+        // this.token.data = data;
+        // this.tableSource = new MatTableDataSource( this.token.data)
+        
+        this.tableSource.paginator = this.paginator;
+        this.tableSource.sort = this.sort;
+      },
+      err => {console.log("Error", err)},
+      () => {console.log("Fim")}
+    );
+  }
+
+  LTS_setTable(){
+    this.service.getTokens().subscribe(resultado => {
+      this.LTS_token = Object.values(resultado.symbols).map((item:any, index) => {
+        return {
+          code: item.code,
+          description: item.description
+        } 
+      })
+      this.tableSource = new MatTableDataSource(this.LTS_token)
+      this.tableSource.paginator = this.paginator;
+      this.tableSource.sort = this.sort;
+    });
+  }
+
   buscaToken(event:Event){
     var value = (event.target as HTMLInputElement).value;
-    this.tableData.filter = value;
+    this.tableSource.filter = value;
   }
 }
