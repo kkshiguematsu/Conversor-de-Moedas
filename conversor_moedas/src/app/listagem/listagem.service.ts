@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Ijson, token,token_data } from './moeda';
+import { Ijson, token,token_data } from '../interfaces/moeda';
 import { map } from 'rxjs/operators'
 import { Token } from '@angular/compiler';
 
