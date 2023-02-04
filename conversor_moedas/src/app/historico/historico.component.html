@@ -1,1 +1,52 @@
-<p>historico works!</p>
+<section class="historico_page d-flex justify-content-center align-items-center">
+    <div class="historico position-relative">
+        <h1 class="title position-absolute top-0 start-50 translate-middle">Histórico</h1>
+
+        <div class="div_table_historico">
+            <table mat-table matSort  [dataSource]="tableSource" class="mat-elevation-z8">
+                <ng-container matColumnDef="data">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-center"> Data </th>
+                    <td mat-cell *matCellDef="let historico" class="text-center">{{ historico.data }}</td>
+                </ng-container>
+                <ng-container matColumnDef="hora">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-center"> Hora </th>
+                    <td mat-cell *matCellDef="let historico" class="text-center">{{ historico.hora }}</td>
+                </ng-container>
+                <ng-container matColumnDef="valor">
+                    <th mat-header-cell *matHeaderCellDef class="text-center"> Valor </th>
+                    <td mat-cell *matCellDef="let historico" class="text-center">{{ historico.valor }}</td>
+                </ng-container>
+                <ng-container matColumnDef="moedaSelecionada">
+                    <th mat-header-cell *matHeaderCellDef class="text-center"> Moeda Selecionada </th>
+                    <td mat-cell *matCellDef="let historico" class="text-center">{{ historico.tokenOrigem }}</td>
+                </ng-container>
+                <ng-container matColumnDef="moedaConvertida">
+                    <th mat-header-cell *matHeaderCellDef class="text-center"> Moeda Convertida </th>
+                    <td mat-cell *matCellDef="let historico" class="text-center">{{ historico.tokenDestino }}</td>
+                </ng-container>
+                <ng-container matColumnDef="resultado">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-center"> Resultado </th>
+                    <td mat-cell *matCellDef="let historico" class="text-center">{{ historico.resultado }}</td>
+                </ng-container>
+                <ng-container matColumnDef="taxa">
+                    <th mat-header-cell *matHeaderCellDef class="text-center"> Taxa </th>
+                    <td mat-cell *matCellDef="let historico" class="text-center">{{ historico.taxa }}</td>
+                </ng-container>
+                <ng-container matColumnDef=" ">
+                    <th mat-header-cell *matHeaderCellDef class="text-center"> </th>
+                    <td mat-cell *matCellDef="let historico" class="text-center">
+                        <button mat-icon-button color="warn">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+                
+                <tr mat-header-row *matHeaderRowDef="displayColunas" ></tr>
+                <tr mat-row *matRowDef="let row; columns: displayColunas;"></tr>
+            </table>
+            <mat-paginator [length]="200" [pageSize]="5" [pageSizeOptions]="[5, 10, 25]"
+                aria-label="Selecionce o periodo de paginas">
+            </mat-paginator>
+        </div>
+    </div>
+</section>

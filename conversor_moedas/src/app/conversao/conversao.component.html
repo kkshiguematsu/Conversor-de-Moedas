@@ -14,8 +14,8 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Token Atual</mat-label>
                     <mat-select formControlName="tokenOrigem">
-                        <mat-option *ngFor="let token of tokens" [value]="token.simbolo">
-                            {{ token.simbolo }}
+                        <mat-option *ngFor="let token of getListTokens()" [value]="token.code">
+                            {{ token.code }}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -24,8 +24,8 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Token Destino</mat-label>
                     <mat-select formControlName="tokenDestino">
-                        <mat-option *ngFor="let token of tokens" [value]="token.simbolo">
-                            {{ token.simbolo }}
+                        <mat-option *ngFor="let token of getListTokens()" [value]="token.code">
+                            {{ token.code }}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>

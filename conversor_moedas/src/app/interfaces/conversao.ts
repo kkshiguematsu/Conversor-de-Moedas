@@ -1,12 +1,7 @@
 export interface Conversao {
     date: string,
-    historical: boolean,
     info: {
         rate: number,
-    },
-    motd:{
-        msg: string,
-        url: string
     },
     query:{
         from: string,
@@ -14,9 +9,15 @@ export interface Conversao {
         amount: number,
     },
     result: number,
-    success: boolean
+}
+
+export interface Itoken{
+    symbols:{
+
+    }
 }
 
 export interface Token {
-    simbolo: string;
+    code: string;
 }
+

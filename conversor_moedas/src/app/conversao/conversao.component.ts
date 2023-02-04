@@ -1,78 +1,91 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { OnInit } from '@angular/core';
-import { Conversao, Token } from './conversao';
+import { Conversao, Token, Itoken } from '../interfaces/conversao';
+import { Historico } from '../interfaces/historico';
 import { ConversaoService } from './conversao.service';
-
-var requestURL = 'https://api.exchangerate.host/symbols';
-var request = new XMLHttpRequest();
-request.open('GET', requestURL);
-request.responseType = 'json';
-request.send();
-
-var tokenData: Token[] = [];
-request.onload = function () {
-  var response = request.response;
-
-  var values = Object.values(response);
-  var json_string: string = JSON.stringify(values[2]);
-  var json = JSON.parse(json_string);
-
-  var tokens = Object.values(json);
-  json_string = JSON.stringify(tokens);
-  json = JSON.parse(json_string);
-
-  for (let i = 0; i < json.length; i++) {
-    var solo_token: Token = { simbolo: json[i].code };
-    tokenData.push(solo_token);
-  }
-}
+import { map } from 'rxjs';
 
 @Component({
-  selector: 'app-conversao',
-  templateUrl: './conversao.component.html',
-  styleUrls: ['./conversao.component.scss']
+    selector: 'app-conversao',
+    templateUrl: './conversao.component.html',
+    styleUrls: ['./conversao.component.scss']
 })
 export class ConversaoComponent implements OnInit {
-  convesorForm: FormGroup;
-  tokens: Token[] = tokenData;
-  conversao: Conversao[] = [];
-  taxa:number;
-  valor:number;
+    convesorForm: FormGroup;
+    private list_tokens: Token[];
+    conversao: Historico[] = [];
+    taxa: number;
+    valor: number;
 
-  constructor(
-    private fb: FormBuilder,
-    private service: ConversaoService,
-  ) { }
+    constructor(
+        private fb: FormBuilder,
+        private service: ConversaoService,
+    ) { }
 
-  ngOnInit() {
-    this.convesorForm = this.fb.group({
-      valor: [''],
-      tokenOrigem: [''],
-      tokenDestino: [''],
-    });
-    sessionStorage.clear();
-
-    // this.service.getTokens().subscribe(dados => {
-    //   this.tokens = { simbolo: dados. };
-    //   console.log(dados.simbolo)
-    // })
-  }
-
-  converterValor() {
-    if (this.convesorForm.value.valor > 0) {
-      this.service.getConvesao(
-        this.convesorForm.value.tokenOrigem,
-        this.convesorForm.value.tokenDestino,
-        this.convesorForm.value.valor).subscribe(dado => {
-          this.conversao.push(dado)
-          this.valor = dado.result
-          this.taxa = dado.info.rate
-        })
-        
-        sessionStorage.setItem("conversao",JSON.stringify(this.conversao));
-    } else {
-      alert("Valor digitado inválido!");
+    ngOnInit() {
+        this.startForm();
+        this.loadTokens();
     }
-  }
+
+    startForm() {
+        this.convesorForm = this.fb.group({
+            valor: [''],
+            tokenOrigem: [''],
+            tokenDestino: [''],
+        });
+    }
+
+    loadTokens() {
+        this.service.getListTokens().pipe(
+            map((resposta: Itoken) => Object.values(resposta.symbols)),
+        ).subscribe(
+            (data: any) => {
+                this.list_tokens = data
+            }
+        )
+    }
+
+    converterValor() {
+        if (this.convesorForm.value.valor > 0) {
+            this.service.getConvesao(this.convesorForm.value.tokenOrigem, this.convesorForm.value.tokenDestino, this.convesorForm.value.valor).subscribe((dado: Conversao) => {
+                const conversao: Historico = this.criaObjHistorico(dado)
+
+                this.valor = dado.result
+                this.taxa = dado.info.rate
+                
+                if(sessionStorage.getItem("conversao") == null){
+                    this.conversao.push(conversao)
+                    console.log("aaaaaaaaaaa")
+                    sessionStorage.setItem("conversao", JSON.stringify(this.conversao));
+                }else{
+                    let lista_historico = JSON.parse(sessionStorage.getItem("conversao") || "{}");
+                    this.conversao = lista_historico;
+                    this.conversao.push(conversao)
+                    sessionStorage.setItem("conversao", JSON.stringify(this.conversao));
+                }
+            })
+        } else {
+            alert("Valor digitado inválido!");
+        }
+    }
+
+    criaObjHistorico(dado: Conversao): Historico {
+        let dataAtual = new Date()
+
+        let Ihistorico: Historico = {
+            data: dado.date,
+            hora: dataAtual.getHours() + ":" + dataAtual.getMinutes(),
+            valor: dado.query.amount,
+            tokenOrigem: dado.query.from,
+            tokenDestino: dado.query.to,
+            resultado: dado.result,
+            taxa: dado.info.rate
+        }
+        return Ihistorico
+    }
+
+    getListTokens(): Token[]{
+        return this.list_tokens;
+    }
 }
