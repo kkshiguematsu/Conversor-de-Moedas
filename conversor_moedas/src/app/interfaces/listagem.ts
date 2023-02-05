@@ -13,7 +13,5 @@ export interface Ijson{
         url:string,
     }
     success: boolean,
-    symbols: {
-       
-    }   
+    symbols: token_data[]
 }

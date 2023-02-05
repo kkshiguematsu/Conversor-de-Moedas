@@ -24,12 +24,21 @@ export class HistoricoComponent implements OnInit{
     }
 
     ngAfterViewInit(){
-        this.tableSource.paginator = this.paginator;
-        this.tableSource.sort = this.sort;
+        this.tableSource.paginator = this.paginator
+        this.tableSource.sort = this.sort
     }
 
     carregaListaHistorico(){
-        this.lista_historico = JSON.parse(sessionStorage.getItem("conversao") || "{}");
+        this.lista_historico = JSON.parse(sessionStorage.getItem("conversao") || "{}")
         this.tableSource = new MatTableDataSource(this.lista_historico)
+    }
+
+    deleteItem(historico: Historico){
+        let lista: Historico[] = JSON.parse(sessionStorage.getItem("conversao") || "{}");
+        lista = lista.filter( busca => {
+            return busca.resultado != historico.resultado;
+        });
+        sessionStorage.setItem("conversao", JSON.stringify(lista));
+        this.tableSource.data = [...lista]
     }
 }

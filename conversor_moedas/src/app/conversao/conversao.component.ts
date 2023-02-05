@@ -47,7 +47,7 @@ export class ConversaoComponent implements OnInit {
     }
 
     converterValor() {
-        if (this.convesorForm.value.valor > 0) {
+        if (this.convesorForm.value.valor > 0 &&  typeof this.convesorForm.value.valor == "number") {
             this.service.getConvesao(this.convesorForm.value.tokenOrigem, this.convesorForm.value.tokenDestino, this.convesorForm.value.valor).subscribe((dado: Conversao) => {
                 const conversao: Historico = this.criaObjHistorico(dado)
 
@@ -56,7 +56,6 @@ export class ConversaoComponent implements OnInit {
                 
                 if(sessionStorage.getItem("conversao") == null){
                     this.conversao.push(conversao)
-                    console.log("aaaaaaaaaaa")
                     sessionStorage.setItem("conversao", JSON.stringify(this.conversao));
                 }else{
                     let lista_historico = JSON.parse(sessionStorage.getItem("conversao") || "{}");

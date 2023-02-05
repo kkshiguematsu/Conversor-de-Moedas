@@ -24,5 +24,10 @@
         .div_table_historico{
 
         }
+
+        ::ng-deep .mat-sort-header-container {
+            display: flex;
+            justify-content: center;
+        }
     }
 }

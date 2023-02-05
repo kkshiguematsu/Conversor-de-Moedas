@@ -29,22 +29,22 @@ export class ListagemComponent implements OnInit {
 
 
     ngOnInit() {
-        this.setTable();
+        this.setTable();   
     }
 
     ngAfterViewInit() {
         
-        this.tableSource.sort = this.sort;
     }
 
     setTable() {
         this.service.getTokens().pipe(
             map((res: Ijson) => Object.values(res.symbols)),
         ).subscribe(
-            (data: any) => {
-                this.tableSource = new MatTableDataSource(data)
-                // this.list_tokens = ;
+            data => {
+                this.list_tokens = data
+                this.tableSource = new MatTableDataSource(this.list_tokens)
                 this.tableSource.paginator = this.paginator;
+                this.tableSource.sort = this.sort;
             },
         );
     }
