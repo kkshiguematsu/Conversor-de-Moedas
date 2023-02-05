@@ -6,4 +6,5 @@ export interface Historico {
     tokenDestino: string;
     resultado: number;
     taxa: number;
+    flag_valor_dolar: boolean;
 }

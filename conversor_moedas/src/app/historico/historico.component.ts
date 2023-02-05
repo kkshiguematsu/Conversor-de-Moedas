@@ -5,7 +5,6 @@ import { Historico } from '../interfaces/historico';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
-
 @Component({
     selector: 'app-historico',
     templateUrl: './historico.component.html',
@@ -18,6 +17,8 @@ export class HistoricoComponent implements OnInit{
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
+
+    constructor(){}
 
     ngOnInit(){
         this.carregaListaHistorico();

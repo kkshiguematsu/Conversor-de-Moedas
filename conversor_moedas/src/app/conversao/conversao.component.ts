@@ -48,6 +48,7 @@ export class ConversaoComponent implements OnInit {
 
     converterValor() {
         if (this.convesorForm.value.valor > 0 &&  typeof this.convesorForm.value.valor == "number") {
+
             this.service.getConvesao(this.convesorForm.value.tokenOrigem, this.convesorForm.value.tokenDestino, this.convesorForm.value.valor).subscribe((dado: Conversao) => {
                 const conversao: Historico = this.criaObjHistorico(dado)
 
@@ -71,6 +72,17 @@ export class ConversaoComponent implements OnInit {
 
     criaObjHistorico(dado: Conversao): Historico {
         let dataAtual = new Date()
+        
+        let  flag;
+        let resultado: number = 0;
+        this.service.getConversaoDolar(dado.query.from,dado.query.amount).subscribe((dado:Conversao) => {
+            resultado = dado.result
+        })
+        if(resultado > 0){
+            flag = true
+        }else{
+            flag = false
+        }
 
         let Ihistorico: Historico = {
             data: dado.date,
@@ -79,12 +91,26 @@ export class ConversaoComponent implements OnInit {
             tokenOrigem: dado.query.from,
             tokenDestino: dado.query.to,
             resultado: dado.result,
-            taxa: dado.info.rate
+            taxa: dado.info.rate,
+            flag_valor_dolar: flag,
         }
+        console.log(Ihistorico.flag_valor_dolar)
         return Ihistorico
     }
 
     getListTokens(): Token[]{
         return this.list_tokens;
+    }
+
+    getValorDolar(token: string, valor: number):boolean{
+        let resultado = 0;
+        this.service.getConversaoDolar(token,valor).subscribe(dado => {
+            resultado = dado.result
+        })
+        if(resultado > 10000){
+            return true
+        }else{
+            return false
+        }
     }
 }

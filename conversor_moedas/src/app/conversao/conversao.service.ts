@@ -19,4 +19,9 @@ export class ConversaoService {
         let url = 'https://api.exchangerate.host/symbols';
         return this.http.get<Itoken>(url);
     }
+
+    getConversaoDolar(tokenOrigem: string, valor: number){
+        let url = "https://api.exchangerate.host/convert?from=" + tokenOrigem + "&to=USD&amount=" + valor;
+        return this.http.get<Conversao>(url);
+    }
 }
