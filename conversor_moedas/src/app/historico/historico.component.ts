@@ -31,6 +31,5 @@ export class HistoricoComponent implements OnInit{
     carregaListaHistorico(){
         this.lista_historico = JSON.parse(sessionStorage.getItem("conversao") || "{}");
         this.tableSource = new MatTableDataSource(this.lista_historico)
-        console.log(this.tableSource)
     }
 }

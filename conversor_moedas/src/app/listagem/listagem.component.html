@@ -1,5 +1,5 @@
 <section class="listagem_page d-flex justify-content-center align-items-center">
-    <div class="listagem border position-relative">
+    <div class="listagem position-relative">
         <h1 class="title position-absolute">Listagem de Moedas</h1>
         <div class="d-flex justify-content-end align-items-center ">
             <mat-form-field>
@@ -11,8 +11,8 @@
         <div >
             <table mat-table [dataSource]="tableSource" matSort class="mat-elevation-z8">
                 <ng-container matColumnDef="simbolo">
-                    <th  mat-header-cell *matHeaderCellDef mat-sort-header class="text-center">Simbolo</th>
-                    <td  mat-cell *matCellDef="let token">{{ token.code }}</td>
+                    <th  mat-header-cell *matHeaderCellDef mat-sort-header class="">Simbolo</th>
+                    <td  mat-cell *matCellDef="let token" class="text-center">{{ token.code }}</td>
                 </ng-container>
                 <ng-container matColumnDef="descricao">
                     <th  mat-header-cell *matHeaderCellDef mat-sort-header class="text-center">Descrição</th>

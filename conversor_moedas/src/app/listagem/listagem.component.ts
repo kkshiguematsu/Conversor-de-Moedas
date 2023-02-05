@@ -5,7 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ListagemService } from './listagem.service';
-import { Ijson, token, token_data } from '../interfaces/moeda';
+import { Ijson, token, token_data } from '../interfaces/listagem';
 import { delay, map } from 'rxjs/operators'
 
 @Component({
@@ -19,20 +19,22 @@ export class ListagemComponent implements OnInit {
     token: token;
     list_tokens: token_data[];
     displayedColunas = ["simbolo", "descricao"]
+    
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort) sort: MatSort;
 
     constructor(
         private service: ListagemService
     ) { }
 
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort;
 
     ngOnInit() {
         this.setTable();
     }
 
     ngAfterViewInit() {
-
+        
+        this.tableSource.sort = this.sort;
     }
 
     setTable() {
@@ -40,11 +42,9 @@ export class ListagemComponent implements OnInit {
             map((res: Ijson) => Object.values(res.symbols)),
         ).subscribe(
             (data: any) => {
-                this.list_tokens = data;
-
-                this.tableSource = new MatTableDataSource(this.list_tokens)
+                this.tableSource = new MatTableDataSource(data)
+                // this.list_tokens = ;
                 this.tableSource.paginator = this.paginator;
-                this.tableSource.sort = this.sort;
             },
         );
     }

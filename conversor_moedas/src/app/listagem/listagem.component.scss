@@ -2,16 +2,16 @@
 
 .listagem_page {
     width: auto;
-    
+
     min-height: 100vh;
     background-color: $light_background;
 
     .title {
-        top: 40px;
-        left: -50px;
+        top: 1.5rem;
+        left: -2rem;
         color: white;
         font-family: $font_title;
-        padding: 5px 10px 5px 100px;
+        padding: 5px 10px 5px 4rem;
         background-color: $primary_color;
         border-radius: 3px;
     }
@@ -21,26 +21,19 @@
     }
 
     .listagem {
-        width: 75%;
+        width: 50%;
         height: auto;
-        padding: 50px;
+        padding: 1.5rem 2rem;
         margin: 30px 0;
         background-color: $second_dark_background;
-        border: 1px solid white;
         border-radius: 10px;
         box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.75);
 
-        div {
 
-            .mat-column-id td,
-            .mat-column-simbolo td,
-            .mat-column-descricao td {
-                text-align: center;
-            }
 
-            .mat-mdc-row:hover .mat-mdc-cell {
-                border-color: $primary_color;
-            }
+        ::ng-deep .mat-sort-header-container {
+            display: flex;
+            justify-content: center;
         }
     }
 }
