@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Conversao, Token, Itoken } from '../interfaces/conversao';
+import { Conversao } from '../interfaces/conversao';
+import { Ijson } from '../interfaces/token';
 
 @Injectable({
     providedIn: 'root'
@@ -15,12 +16,12 @@ export class ConversaoService {
         return this.http.get<Conversao>(url)
     }
 
-    getListTokens(): Observable<Itoken> {
+    getListTokens(): Observable<Ijson> {
         let url = 'https://api.exchangerate.host/symbols';
-        return this.http.get<Itoken>(url);
+        return this.http.get<Ijson>(url);
     }
 
-    getConversaoDolar(tokenOrigem: string, valor: number){
+    getConversaoDolar(tokenOrigem: string, valor: number): Observable<Conversao>{
         let url = "https://api.exchangerate.host/convert?from=" + tokenOrigem + "&to=USD&amount=" + valor;
         return this.http.get<Conversao>(url);
     }

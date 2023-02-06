@@ -11,11 +11,3 @@ export interface Conversao {
     result: number,
 }
 
-export interface Itoken{
-    symbols:Token[]
-}
-
-export interface Token {
-    code: string;
-}
-

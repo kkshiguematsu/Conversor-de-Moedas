@@ -1,9 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Ijson, token, token_data } from '../interfaces/listagem';
-import { map } from 'rxjs/operators'
-import { Token } from '@angular/compiler';
+import { Ijson } from '../interfaces/token';
 
 @Injectable({
     providedIn: 'root'

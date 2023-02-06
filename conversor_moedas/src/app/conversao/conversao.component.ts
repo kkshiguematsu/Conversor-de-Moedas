@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { OnInit } from '@angular/core';
-import { Conversao, Token, Itoken } from '../interfaces/conversao';
+
+import { Conversao } from '../interfaces/conversao';
+import { Ijson, token_data } from '../interfaces/token';
 import { Historico } from '../interfaces/historico';
-import { ConversaoService } from './conversao.service';
+
+import { ConversaoService } from '../service/conversao.service';
 import { map } from 'rxjs';
 
 @Component({
@@ -13,7 +16,7 @@ import { map } from 'rxjs';
 })
 export class ConversaoComponent implements OnInit {
     convesorForm: FormGroup;
-    private list_tokens: Token[];
+    private list_tokens: token_data[];
     conversao: Historico[] = [];
     taxa: number;
     valor: number;
@@ -38,7 +41,7 @@ export class ConversaoComponent implements OnInit {
 
     loadTokens() {
         this.service.getListTokens().pipe(
-            map((resposta: Itoken) => Object.values(resposta.symbols)),
+            map((resposta: Ijson) => Object.values(resposta.symbols)),
         ).subscribe(
             data => {
                 this.list_tokens = data
@@ -110,7 +113,7 @@ export class ConversaoComponent implements OnInit {
         return Ihistorico
     }
 
-    getListTokens(): Token[] {
+    getListTokens(): token_data[] {
         return this.list_tokens;
     }
 }

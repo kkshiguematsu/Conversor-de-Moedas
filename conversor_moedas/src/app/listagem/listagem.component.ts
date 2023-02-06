@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
+
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ListagemService } from './listagem.service';
-import { Ijson, token, token_data } from '../interfaces/listagem';
+
+import { ListagemService } from '../service/listagem.service';
+import { token_data } from '../interfaces/token';
 import { delay, map } from 'rxjs/operators'
 
 @Component({
@@ -16,10 +18,9 @@ import { delay, map } from 'rxjs/operators'
 
 export class ListagemComponent implements OnInit {
     tableSource: MatTableDataSource<token_data>;
-    token: token;
     list_tokens: token_data[];
     displayedColunas = ["simbolo", "descricao"]
-    
+
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
@@ -29,20 +30,20 @@ export class ListagemComponent implements OnInit {
 
 
     ngOnInit() {
-        this.setTable();   
+        this.setTable();
     }
 
     ngAfterViewInit() {
-        
+
     }
 
     setTable() {
         this.service.getTokens().pipe(
-            map((res: Ijson) => Object.values(res.symbols)),
+            map(res => Object.values(res.symbols)),
         ).subscribe(
             data => {
                 this.list_tokens = data
-                this.tableSource = new MatTableDataSource(this.list_tokens)
+                this.tableSource = new MatTableDataSource(data)
                 this.tableSource.paginator = this.paginator;
                 this.tableSource.sort = this.sort;
             },
