@@ -40,7 +40,7 @@ export class ConversaoComponent implements OnInit {
         this.service.getListTokens().pipe(
             map((resposta: Itoken) => Object.values(resposta.symbols)),
         ).subscribe(
-            (data: any) => {
+            data => {
                 this.list_tokens = data
             }
         )
@@ -49,6 +49,11 @@ export class ConversaoComponent implements OnInit {
     converterValor() {
         this.conversao = JSON.parse(sessionStorage.getItem("conversao") || "{}")
 
+        let valor_dolar: number
+        this.service.getConversaoDolar(this.convesorForm.value.tokenOrigem, this.convesorForm.value.valor).subscribe((dado: Conversao) => {
+            valor_dolar = dado.result
+        })
+
         if (this.convesorForm.value.valor > 0 && typeof this.convesorForm.value.valor == "number") {
             this.service.getConvesao(this.convesorForm.value.tokenOrigem, this.convesorForm.value.tokenDestino, this.convesorForm.value.valor)
                 .subscribe((dado: Conversao) => {
@@ -56,17 +61,18 @@ export class ConversaoComponent implements OnInit {
 
                     this.valor = dado.result
                     this.taxa = dado.info.rate
+
                     if (this.conversao.length != 0) {
                         if (this.conversao.filter(item => item.id == this.conversao.length)) {
-                            conversao = this.criaObjHistorico(dado, this.conversao[this.conversao.length-1].id + 1)
+                            conversao = this.criaObjHistorico(dado, this.conversao[this.conversao.length - 1].id + 1, valor_dolar)
                         } else {
-                            conversao = this.criaObjHistorico(dado, this.conversao.length)
+                            conversao = this.criaObjHistorico(dado, this.conversao.length, valor_dolar)
                         }
 
                         this.conversao.push(conversao)
                         sessionStorage.setItem("conversao", JSON.stringify(this.conversao));
                     } else {
-                        conversao = this.criaObjHistorico(dado,1)
+                        conversao = this.criaObjHistorico(dado, 1, valor_dolar)
 
                         this.conversao = []
                         this.conversao.push(conversao)
@@ -78,20 +84,17 @@ export class ConversaoComponent implements OnInit {
         }
     }
 
-    criaObjHistorico(dado: Conversao, index: number): Historico {
+    criaObjHistorico(dado: Conversao, index: number, valor_dolar: number): Historico {
         let dataAtual = new Date()
+        let Ihistorico: Historico
 
         let flag;
-        let resultado: number = 0;
-        let Ihistorico: Historico
-        this.service.getConversaoDolar(dado.query.from, dado.query.amount).subscribe((dado: Conversao) => {
-            resultado = dado.result
-        })
-        if (resultado > 0) {
+        if (valor_dolar > 10000) {
             flag = true
         } else {
             flag = false
         }
+
         Ihistorico = {
             id: index,
             data: dado.date,
@@ -109,17 +112,5 @@ export class ConversaoComponent implements OnInit {
 
     getListTokens(): Token[] {
         return this.list_tokens;
-    }
-
-    getValorDolar(token: string, valor: number): boolean {
-        let resultado = 0;
-        this.service.getConversaoDolar(token, valor).subscribe(dado => {
-            resultado = dado.result
-        })
-        if (resultado > 10000) {
-            return true
-        } else {
-            return false
-        }
     }
 }

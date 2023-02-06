@@ -25,40 +25,42 @@ import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ConversaoComponent } from './conversao/conversao.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    MenuComponent,
-    FooterComponent,
-    ListagemComponent,
-    HistoricoComponent,
-    ConversaoComponent,
-    
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    NgbModule,
-    
-    MatSlideToggleModule,
-    MatButtonModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDividerModule,
-    MatPaginatorModule,
-    MatTableModule,
-    MatSortModule,
-    MatSelectModule,
-    ReactiveFormsModule,
-    HttpClientModule,
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        MenuComponent,
+        FooterComponent,
+        ListagemComponent,
+        HistoricoComponent,
+        ConversaoComponent,
 
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        NgbModule,
+
+        MatSlideToggleModule,
+        MatButtonModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDividerModule,
+        MatPaginatorModule,
+        MatTableModule,
+        MatSortModule,
+        MatSelectModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        MatTooltipModule,
+
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,9 +12,7 @@ export interface Conversao {
 }
 
 export interface Itoken{
-    symbols:{
-
-    }
+    symbols:Token[]
 }
 
 export interface Token {
