@@ -37,9 +37,10 @@ export class HistoricoComponent implements OnInit{
     deleteItem(historico: Historico){
         let lista: Historico[] = JSON.parse(sessionStorage.getItem("conversao") || "{}");
         lista = lista.filter( busca => {
-            return busca.resultado != historico.resultado;
+            return busca.id != historico.id;
         });
         sessionStorage.setItem("conversao", JSON.stringify(lista));
         this.tableSource.data = [...lista]
+        console.log(this.tableSource.data)
     }
 }
