@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { OnInit } from '@angular/core';
 
@@ -8,6 +8,9 @@ import { Historico } from '../interfaces/historico';
 
 import { ConversaoService } from '../service/conversao.service';
 import { map } from 'rxjs';
+
+import {MatSnackBar, MatSnackBarRef} from '@angular/material/snack-bar';
+import { SnackbarAlertComponent } from './snackbar-alert/snackbar-alert.component';
 
 @Component({
     selector: 'app-conversao',
@@ -20,10 +23,12 @@ export class ConversaoComponent implements OnInit {
     conversao: Historico[] = [];
     taxa: number;
     valor: number;
+    toggle_alerta: boolean
 
     constructor(
         private fb: FormBuilder,
         private service: ConversaoService,
+        private snackBar: MatSnackBar,
     ) { }
 
     ngOnInit() {
@@ -77,13 +82,12 @@ export class ConversaoComponent implements OnInit {
                     } else {
                         conversao = this.criaObjHistorico(dado, 1, valor_dolar)
 
-                        this.conversao = []
                         this.conversao.push(conversao)
                         sessionStorage.setItem("conversao", JSON.stringify(this.conversao));
                     }
                 })
         } else {
-            alert("Valor digitado inválido!");
+            this.openSnackBar()
         }
     }
 
@@ -92,7 +96,7 @@ export class ConversaoComponent implements OnInit {
         let Ihistorico: Historico
 
         let flag;
-        if (valor_dolar > 10000) {
+        if (valor_dolar >= 10000) {
             flag = true
         } else {
             flag = false
@@ -109,11 +113,16 @@ export class ConversaoComponent implements OnInit {
             taxa: dado.info.rate,
             flag_valor_dolar: flag,
         }
-        console.log(Ihistorico.flag_valor_dolar)
         return Ihistorico
     }
 
     getListTokens(): token_data[] {
         return this.list_tokens;
     }
+
+    openSnackBar() {
+        this.snackBar.openFromComponent(SnackbarAlertComponent, {
+          duration: 3 * 1000,
+        });
+      }
 }
